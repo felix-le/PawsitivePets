@@ -38,5 +38,11 @@ namespace PawsitivePets.Controllers
 
             return View();
         }
+
+        // /Categories/Create
+        public IActionResult Create()
+        {
+            return View();
+        }
     }
 }
