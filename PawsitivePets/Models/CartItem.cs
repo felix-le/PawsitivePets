@@ -21,5 +21,8 @@ namespace PawsitivePets.Models
 
         [Required]
         public int PetId { get; set; }
+
+        // parent ref (1 Pet => Many CartItems)
+        public Pet Pet { get; set; }
     }
 }

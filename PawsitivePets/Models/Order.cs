@@ -42,5 +42,8 @@ namespace PawsitivePets.Models
         public string CustomerId { get; set; }
 
         public string PaymentCode { get; set; }
+
+        // Child Ref: 1 Order => Many OrderDetails
+        public List<OrderDetail> OrderDetails { get; set; }
     }
 }
