@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using PawsitivePets.Models;
 
 namespace PawsitivePets.Data
 {
@@ -12,5 +13,6 @@ namespace PawsitivePets.Data
             : base(options)
         {
         }
+        public DbSet<PawsitivePets.Models.Category> Category { get; set; }
     }
 }
