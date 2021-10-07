@@ -124,7 +124,7 @@ namespace PawsitivePets.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("PetId,Name,Colour,Age,CategoryId,Price,Photo")] Pet pet)
+        public async Task<IActionResult> Edit(int id, [Bind("PetId,Name,Colour,Age,CategoryId,Price")] Pet pet, IFormFile Photo)
         {
             if (id != pet.PetId)
             {
@@ -135,6 +135,14 @@ namespace PawsitivePets.Controllers
             {
                 try
                 {
+                    // upload Photo if any
+                    if (Photo != null)
+                    {
+                        // call our upload method and store the unique file name we get back
+                        var fileName = UploadPhoto(Photo);
+                        pet.Photo = fileName; // give the new pet object the unique file name to save
+                    }
+
                     _context.Update(pet);
                     await _context.SaveChangesAsync();
                 }
