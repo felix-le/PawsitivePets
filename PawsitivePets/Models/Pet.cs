@@ -24,6 +24,7 @@ namespace PawsitivePets.Models
         public int CategoryId { get; set; }
 
         [Required]
+        [DisplayFormat(DataFormatString = "{0:c}")]  // c represents MS currency format
         public decimal Price { get; set; }
 
         public string Photo { get; set; }

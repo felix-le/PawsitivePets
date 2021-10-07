@@ -1,41 +1,43 @@
 ﻿@model IEnumerable<PawsitivePets.Models.Pet>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Pets";
 }
 
-<h1>Index</h1>
+<h1>Pets</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-<table class="table">
+<table class="table sortable">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Name)
+                <a href="#">Category</a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Colour)
+                <a href="#">Name</a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Age)
+                <a href="#">Colour</a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Price)
+                <a href="#">Age</a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Photo)
+                <a href="#">Price</a>
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Category)
+            <th class="sorttable_nosort">              
             </th>
-            <th></th>
+            <th class="sorttable_nosort"></th>
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
         <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category.Name)
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
@@ -51,9 +53,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Photo)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Category.Name)
-            </td>
+
             <td>
                 <a asp-action="Edit" asp-route-id="@item.PetId">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.PetId">Details</a> |

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -22,7 +23,7 @@ namespace PawsitivePets.Controllers
         // GET: Pets
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Pets.Include(p => p.Category);
+            var applicationDbContext = _context.Pets.Include(p => p.Category).OrderBy(p => p.Category.Name).ThenBy(p => p.Name);
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -44,6 +45,12 @@ namespace PawsitivePets.Controllers
 
             return View(pet);
         }
+
+        private static string UploadPhoto(IFormFile Photo)
+        {
+
+        }
+
 
         // GET: Pets/Create
         public IActionResult Create()
