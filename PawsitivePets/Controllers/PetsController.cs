@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
@@ -48,7 +49,24 @@ namespace PawsitivePets.Controllers
 
         private static string UploadPhoto(IFormFile Photo)
         {
+            // get temp location of uploaded file
+            var filePath = Path.GetTempFileName();
 
+            // create a unique name for the image so we dont overwrite any existing images
+            // use the Globally Unique Identifier (GUID) class: bob.jpg => a3987asdf-bob.jpg
+            var fileName = Guid.NewGuid() + "-" + Photo.FileName;
+
+            // set destination folder dynamically so it works on any system
+            var uploadPath = System.IO.Directory.GetCurrentDirectory() + "\\wwwroot\\img\\pets\\" + fileName;
+
+            // execute the file save
+            using (var stream = new FileStream(uploadPath, FileMode.Create))
+            {
+                Photo.CopyTo(stream);
+            }
+
+            // send the unique uploaded file name back so we can save it to the db along with the pet data
+            return fileName;
         }
 
 
