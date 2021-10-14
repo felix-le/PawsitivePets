@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -10,6 +11,8 @@ using PawsitivePets.Models;
 
 namespace PawsitivePets.Controllers
 {
+    // make whole controller available only to authenticated users
+    [Authorize]
     public class CategoriesController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -26,6 +29,7 @@ namespace PawsitivePets.Controllers
         }
 
         // GET: Categories/Details/5
+        [AllowAnonymous] // make this method only public since users can't change anything here
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
