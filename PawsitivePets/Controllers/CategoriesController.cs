@@ -12,7 +12,7 @@ using PawsitivePets.Models;
 namespace PawsitivePets.Controllers
 {
     // make whole controller available only to authenticated users
-    [Authorize]
+    [Authorize(Roles = "Administrator")]
     public class CategoriesController : Controller
     {
         private readonly ApplicationDbContext _context;
