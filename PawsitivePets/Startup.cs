@@ -37,6 +37,14 @@ namespace PawsitivePets
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
+
+            // enable Google Login using NuGet package we installed and API keys we added to appsettings.json
+            services.AddAuthentication()
+                .AddGoogle(options =>
+                {
+                    options.ClientId = Configuration.GetValue<string>("Authentication:Google:ClientId");
+                    options.ClientSecret = Configuration.GetValue<string>("Authentication:Google:ClientSecret");
+                });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
